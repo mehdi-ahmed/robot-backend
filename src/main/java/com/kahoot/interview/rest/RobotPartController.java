@@ -2,6 +2,7 @@ package com.kahoot.interview.rest;
 
 import com.kahoot.interview.domain.RobotPart;
 import com.kahoot.interview.domain.RobotPartCompatible;
+import com.kahoot.interview.repositories.RobotPartCompatibleRepository;
 import com.kahoot.interview.repositories.RobotPartRepository;
 import com.kahoot.interview.rest.exception.RobotPartIdMismatchException;
 import com.kahoot.interview.rest.exception.RobotPartNotFoundException;
@@ -20,6 +21,9 @@ public class RobotPartController {
     @Autowired
     private RobotPartRepository robotPartRepository;
 
+    @Autowired
+    private RobotPartCompatibleRepository robotPartCompatibleRepository;
+
     @ApiOperation(value = "Return all robot parts", notes = "All Robot Parts")
     @GetMapping
     public Iterable findAll() {
@@ -33,10 +37,11 @@ public class RobotPartController {
     }
 
     @ApiOperation(value = "Returns a list of RobotParts compatible with a given robot serialNumber", notes = "List of compatible Stuff")
-    @GetMapping(value = "/compatible/{id}")
-    public List<RobotPartCompatible> getCompatiblePartsBySerialNumber(@PathVariable String id) {
-        return robotPartRepository.findCompatiblePartsById(id);
+    @GetMapping(value = "/compatible/{sourceRobotPartId}")
+    public List<RobotPartCompatible> getCompatiblePartsBySerialNumber(@PathVariable long sourceRobotPartId) {
+        return robotPartCompatibleRepository.findBySourceRobotPartId(sourceRobotPartId) ;
     }
+
 
     @ApiOperation(value = "Adds a new RobotPart", notes = "Return a newly added part if success")
     @PostMapping("/add")

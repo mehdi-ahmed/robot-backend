@@ -1,17 +1,23 @@
 package com.kahoot.interview.domain;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
-public class RobotPartCompatible{
+@Entity(name = "ROBOT_PART_COMPATIBLE")
+@Table(name = "ROBOT_PART_COMPATIBLE")
+public class RobotPartCompatible {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "serialNumber", nullable = false)
     private String serialNumber;
+
+    @Column(name = "sourceRobotPartId", nullable = false)
+    private Long sourceRobotPartId;
 
 
     public Long getId() {
@@ -30,6 +36,13 @@ public class RobotPartCompatible{
         this.serialNumber = serialNumber;
     }
 
+    public Long getSourceRobotPartId() {
+        return sourceRobotPartId;
+    }
+
+    public void setSourceRobotPartId(Long sourceRobotPartId) {
+        this.sourceRobotPartId = sourceRobotPartId;
+    }
 
     @Override
     public boolean equals(Object o) {

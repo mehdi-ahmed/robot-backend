@@ -4,8 +4,10 @@ import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "ROBOT_PART")
+@Table(name = "ROBOT_PART")
 public class RobotPart {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +24,6 @@ public class RobotPart {
 
     @Column(nullable = false)
     private String weight;
-
 
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)

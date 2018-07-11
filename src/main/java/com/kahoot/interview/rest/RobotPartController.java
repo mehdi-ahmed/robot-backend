@@ -36,9 +36,9 @@ public class RobotPartController {
         return robotPartRepository.findById(id).orElseThrow(() -> new RobotPartNotFoundException("The RobotPart is MIA !"));
     }
 
-    @ApiOperation(value = "Returns a list of RobotParts compatible with a given robot serialNumber", notes = "List of compatible Stuff")
+    @ApiOperation(value = "Returns a list of RobotParts compatible with a given robot RobotPart Id", notes = "List of compatible Stuff")
     @GetMapping(value = "/compatible/{sourceRobotPartId}")
-    public List<RobotPartCompatible> getCompatiblePartsBySerialNumber(@PathVariable long sourceRobotPartId) {
+    public List<RobotPartCompatible> getCompatibleParts(@PathVariable long sourceRobotPartId) {
         return robotPartCompatibleRepository.findBySourceRobotPartId(sourceRobotPartId) ;
     }
 

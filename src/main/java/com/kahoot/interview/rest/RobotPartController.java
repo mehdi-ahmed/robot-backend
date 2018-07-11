@@ -33,9 +33,9 @@ public class RobotPartController {
     }
 
     @ApiOperation(value = "Returns a list of RobotParts compatible with a given robot serialNumber", notes = "List of compatible Stuff")
-    @GetMapping(value = "/compatible/{serialNumber}")
-    public List<RobotPart> getCompatiblePartsBySerialNumber(@PathVariable String serialId) {
-        return robotPartRepository.findCompatiblePartsBySerialNumber(serialId);
+    @GetMapping(value = "/compatible/{id}")
+    public List<RobotPartCompatible> getCompatiblePartsBySerialNumber(@PathVariable String id) {
+        return robotPartRepository.findCompatiblePartsById(id);
     }
 
     @ApiOperation(value = "Adds a new RobotPart", notes = "Return a newly added part if success")

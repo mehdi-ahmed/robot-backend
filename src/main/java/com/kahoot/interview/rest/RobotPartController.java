@@ -79,4 +79,9 @@ public class RobotPartController {
         robotPartRepository.findById(id).orElseThrow(() -> new RobotPartNotFoundException("The RobotPart is MIA !"));
         return robotPartRepository.save(robotPart);
     }
+
+    @GetMapping("/name/{name}")
+    public List<RobotPart> findByName(@PathVariable String name) {
+        return robotPartRepository.findByName(name);
+    }
 }

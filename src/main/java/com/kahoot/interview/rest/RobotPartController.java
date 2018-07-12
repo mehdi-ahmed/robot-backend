@@ -24,6 +24,7 @@ public class RobotPartController {
     @Autowired
     private RobotPartCompatibleRepository robotPartCompatibleRepository;
 
+
     @ApiOperation(value = "Return all robot parts", notes = "All Robot Parts")
     @GetMapping
     public Iterable findAll() {

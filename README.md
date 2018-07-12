@@ -9,8 +9,17 @@
    - Swagger UI for a documenting the REST API.
    - Spring 5.x / Java 8 / Maven 3.x
    
+**- How to run the application**
+
+        - Command line : mvn clean install-U
+         OR : 
+        
+        - Import to IDE and run the Main class RobotChallengeApplication.java  
    
    
+   Remark : Default port used is 8081    
+   -  In case there is a problem with the current port being used, please change the port in the resources/application.properties
+   and also in the test/resources/test.properties
               
 **- Swagger Ui**
      

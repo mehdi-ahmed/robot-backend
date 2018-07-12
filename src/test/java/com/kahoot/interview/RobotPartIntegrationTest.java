@@ -6,31 +6,35 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringRunner.class)
-@EnableAutoConfiguration
+@EnableConfigurationProperties
+@TestPropertySource(locations = "classpath:test.properties")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class RobotPartIntegrationTest {
 
-    private static final String API_ROOT = "http://localhost:8081/kahoot/resources/robots";
+    @Value("${server.url.endpoint}")
+    String apiRoot;
 
     @Test
     public void whenGetAllRobotParts_thenOK() {
-        final Response response = RestAssured.get(API_ROOT);
+        final Response response = RestAssured.get(apiRoot);
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
     }
 
     @Test
     public void whenGetNotExistRobotPart_thenNotFound() {
-        final Response response = RestAssured.get(API_ROOT + "/1000");
+        final Response response = RestAssured.get(apiRoot + "/1000");
         assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
     }
 
@@ -43,7 +47,7 @@ public class RobotPartIntegrationTest {
         final Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(part)
-                .post(API_ROOT + "/add");
+                .post(apiRoot + "/add");
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode());
     }
 
@@ -56,7 +60,7 @@ public class RobotPartIntegrationTest {
         final Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(partInvalid)
-                .post(API_ROOT + "/add");
+                .post(apiRoot + "/add");
         assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode());
     }
 

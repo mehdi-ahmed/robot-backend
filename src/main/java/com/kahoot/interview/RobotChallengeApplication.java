@@ -14,7 +14,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("com.kahoot.interview")
 @EnableJpaRepositories("com.kahoot.interview.repositories")
 @EntityScan("com.kahoot.interview.domain")
-public class RobotChallengeApplication {
+public class
+RobotChallengeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RobotChallengeApplication.class, args);

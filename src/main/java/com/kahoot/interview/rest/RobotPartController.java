@@ -55,6 +55,7 @@ public class RobotPartController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public RobotPart add(@RequestBody RobotPart robotPart) {
+        LOGGER.info(String.format("Create Robot part with serialNumber = %s", robotPart.getSerialNumber()));
         return robotPartRepository.save(robotPart);
     }
 

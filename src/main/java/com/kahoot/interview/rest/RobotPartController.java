@@ -7,6 +7,8 @@ import com.kahoot.interview.repositories.RobotPartRepository;
 import com.kahoot.interview.rest.exception.RobotPartIdMismatchException;
 import com.kahoot.interview.rest.exception.RobotPartNotFoundException;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,9 @@ import java.util.Set;
 @RequestMapping("/kahoot/resources/robots")
 public class RobotPartController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RobotPartController.class);
+
+
     @Autowired
     private RobotPartRepository robotPartRepository;
 
@@ -28,6 +33,8 @@ public class RobotPartController {
     @ApiOperation(value = "Return all robot parts", notes = "All Robot Parts")
     @GetMapping
     public Iterable findAll() {
+        LOGGER.info("Finding All Robot Parts..");
+
         return robotPartRepository.findAll();
     }
 
@@ -54,6 +61,8 @@ public class RobotPartController {
     @ApiOperation(value = "Delete a RobotPart", notes = "Delete")
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
+        LOGGER.info(String.format("Deleting Robot part with Id = %d", id));
+
         robotPartRepository.findById(id).orElseThrow(() -> new RobotPartNotFoundException("The RobotPart is MIA !"));
         robotPartRepository.deleteById(id);
     }
@@ -61,6 +70,8 @@ public class RobotPartController {
     @ApiOperation(value = "Updates a RobotPart", notes = "Updates a RobotPart. Any new compatible RobotPart needs to be added via UPDATE")
     @PutMapping("/update/{id}")
     public RobotPart update(@RequestBody RobotPart robotPart, @PathVariable Long id) {
+        LOGGER.info(String.format("Updating Robot part with Id = %d", id));
+
         if (robotPart.getId() != id) {
             throw new RobotPartIdMismatchException("Robot Part Id mismatch !");
         }

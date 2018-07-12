@@ -19,6 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/console/**").permitAll();
 
         httpSecurity.csrf().disable();
+
+        //This is deactivated to allow testing PUT/DELETE in the REST Client(Running on a browser locally)
+        // httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         httpSecurity.headers().frameOptions().disable();
     }
+
 }

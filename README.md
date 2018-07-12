@@ -11,7 +11,7 @@
    
 **- How to run the application**
 
-        - Command line : mvn clean install-U
+        - Command line : mvn clean install -U
          OR : 
         
         - Import to IDE and run the Main class RobotChallengeApplication.java  
@@ -19,7 +19,7 @@
    
    Remark : Default port used is 8081    
    -  In case there is a problem with the current port being used, please change the port in the resources/application.properties
-   and also in the test/resources/test.properties
+   and also in the test/resources/test.properties that is used in the Integration Tests.
               
 **- Swagger Ui**
      

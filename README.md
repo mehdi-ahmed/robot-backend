@@ -11,7 +11,7 @@
    
 **- How to run the application**
 
-        - Command line : mvn clean install -U
+        - Command line : ./mvnw clean install -U and then mvn spring-boot:run
          OR : 
         
         - Import to IDE and run the Main class RobotChallengeApplication.java  
